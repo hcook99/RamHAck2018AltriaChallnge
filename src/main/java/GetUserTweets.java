@@ -8,10 +8,10 @@ public class GetUserTweets {
     public ArrayList sentimentValues(String queryText) throws Exception {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
-                .setOAuthConsumerKey("*****************************************************")
-                .setOAuthConsumerSecret("*****************************************************")
-                .setOAuthAccessToken("*****************************************************")
-                .setOAuthAccessTokenSecret("**********************************************");
+                .setOAuthConsumerKey("IEY1skT2NUGZnnfxmPYb3Jjxx")
+                .setOAuthConsumerSecret("jk2AZRc9Kp9OOBHLRHjYwV8xS2j2QfWAlyr3QUZZ5cDh5FyEG4")
+                .setOAuthAccessToken("1013155241003536385-i9R1cMvMBE8pkzMAIHF7nRN8FyGiHv")
+                .setOAuthAccessTokenSecret("4xtp8t5FeqA18tHQR2wNVt1R9LWA2Ho18Pg6aFUzHVChK");
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         Query query = new Query(queryText+ " -filter:retweets");

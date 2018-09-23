@@ -1,0 +1,5 @@
+0 % Extremely Negative
+1 % Negative
+37 % Neutral
+19 % Positive
+2 % Extremely Positive

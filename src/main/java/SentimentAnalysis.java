@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class SentimentAnalysis {
     public SentimentAnalysis(){
-        setEnv("GOOGLE_APPLICATION_CREDENTIALS", "/Users/harrisoncook/altriaapphackath-**********************.json");
+        setEnv("GOOGLE_APPLICATION_CREDENTIALS", "/Users/harrisoncook/altriaapphackath-1537677778875-d90d205870f5.json");
         authImplicit();
     }
     public float getSentiment(String text) throws Exception {
