@@ -7,6 +7,7 @@ import com.google.cloud.language.v1.Sentiment;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import io.grpc.StatusRuntimeException;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -14,14 +15,21 @@ import java.util.Map;
 
 public class SentimentAnalysis {
     public SentimentAnalysis(){
-        setEnv("GOOGLE_APPLICATION_CREDENTIALS", "/Users/harrisoncook/altriaapphackath-1537677778875-d90d205870f5.json");
+        setEnv("GOOGLE_APPLICATION_CREDENTIALS", "/Users/harrisoncook/altriaapphackath-**********************.json");
         authImplicit();
     }
     public float getSentiment(String text) throws Exception {
         LanguageServiceClient language = LanguageServiceClient.create();
         Document doc = Document.newBuilder().setContent(text).setType(Document.Type.PLAIN_TEXT).build();
-        AnalyzeSentimentResponse response = language.analyzeSentiment(doc);
+        AnalyzeSentimentResponse response=null;
+        try {
+            response = language.analyzeSentiment(doc);
+        }catch(StatusRuntimeException e){
+            e.getStatus();
+        }
         Sentiment sentiment = response.getDocumentSentiment();
+        System.out.println(sentiment.getScore());
+        language.close();
         return sentiment.getScore();
 
     }

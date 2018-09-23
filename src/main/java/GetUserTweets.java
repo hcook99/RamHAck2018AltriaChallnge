@@ -1,13 +1,20 @@
 import twitter4j.*;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GetUserTweets {
-    public static void main(String[] args) {
-        Twitter twitter = TwitterFactory.getSingleton();
-        Query query = new Query("(I) AND (Nike) AND ((Hate) OR (Love))"+ " -filter:retweets");
-
+    public ArrayList sentimentValues(String queryText) throws Exception {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey("*****************************************************")
+                .setOAuthConsumerSecret("*****************************************************")
+                .setOAuthAccessToken("*****************************************************")
+                .setOAuthAccessTokenSecret("**********************************************");
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        Twitter twitter = tf.getInstance();
+        Query query = new Query(queryText+ " -filter:retweets");
         query.setLang("en");
         Paging paging = new Paging();
         query.setCount(100);
@@ -21,12 +28,11 @@ public class GetUserTweets {
         for(Status status: queryResult.getTweets()){
             tweetsContent.add(status.getText());
         }
-        System.out.println(tweetsContent.size());
+        ArrayList<Float> sentiments = new ArrayList<Float>();
         SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
         for(String tweetContent: tweetsContent){
-            System.out.println(tweetContent);
-            //System.out.println(sentimentAnalysis.getSentiment(tweetContent));
+            sentiments.add(sentimentAnalysis.getSentiment(tweetContent));
         }
-
+        return sentiments;
      }
 }
